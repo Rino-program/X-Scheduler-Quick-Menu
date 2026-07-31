@@ -5,7 +5,10 @@
   "description": "Add a quick schedule dropdown next to X post buttons.",
   "browser_specific_settings": {
     "gecko": {
-      "id": "x-scheduler-quick-menu@example.com"
+      "id": "x-scheduler-quick-menu@example.com",
+      "data_collection_permissions": {
+        "required": ["none"]
+      }
     }
   },
   "permissions": ["storage"],
