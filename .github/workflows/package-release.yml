@@ -25,15 +25,20 @@ jobs:
       - name: Create release archive
         run: |
           mkdir -p dist
-          ARCHIVE_NAME="X-Scheduler-Quick-Menu-v${{ steps.version.outputs.value }}.zip"
-          # -x で dist フォルダとすべての .zip ファイルを明確に除外します
-          zip -r "dist/$ARCHIVE_NAME" . -x "dist/*" "*.zip" ".git/*" ".github/*"
+          ZIP_NAME="X-Scheduler-Quick-Menu-v${{ steps.version.outputs.value }}.zip"
+          zip -r "dist/$ZIP_NAME" . -x "dist/*" -x ".git/*" -x ".github/*" -x "*.zip"
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: X-Scheduler-Quick-Menu-v${{ steps.version.outputs.value }}
-          path: dist/*.zip
+          # 作成したZIPではなく、生のファイルを渡す（GitHubが勝手にZIP化するため）
+          path: |
+            .
+            !dist
+            !.git
+            !.github
+            !*.zip
 
       - name: Upload release asset
         if: github.event_name == 'release'
