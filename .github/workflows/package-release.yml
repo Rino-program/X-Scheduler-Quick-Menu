@@ -25,8 +25,9 @@ jobs:
       - name: Create release archive
         run: |
           mkdir -p dist
-          ZIP_NAME="X-Scheduler-Quick-Menu-v${{ steps.version.outputs.value }}.zip"
-          zip -r "dist/$ZIP_NAME" . -x "dist/*" -x ".git/*" -x ".github/*" -x "*.zip"
+          ARCHIVE_NAME="X-Scheduler-Quick-Menu-v${{ steps.version.outputs.value }}.zip"
+          # -x で dist フォルダとすべての .zip ファイルを明確に除外します
+          zip -r "dist/$ARCHIVE_NAME" . -x "dist/*" "*.zip" ".git/*" ".github/*"
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
