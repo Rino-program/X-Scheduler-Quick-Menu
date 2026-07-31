@@ -1,0 +1,287 @@
+.x-scheduler-quick-button {
+  appearance: none;
+  border: 0;
+  border-radius: 9999px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 36px;
+  min-width: 36px;
+  height: 36px;
+  padding: 0;
+  margin-left: 6px;
+  background: rgb(29, 155, 240);
+  color: rgb(255, 255, 255);
+  font: inherit;
+  font-weight: 700;
+  line-height: 1;
+  transition: background-color 120ms ease, transform 120ms ease, box-shadow 120ms ease;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
+}
+
+.x-scheduler-quick-button:hover {
+  background: rgb(26, 140, 216);
+  transform: translateY(-1px);
+}
+
+.x-scheduler-quick-button:active {
+  transform: translateY(0);
+}
+
+.x-scheduler-quick-button:focus-visible,
+.x-scheduler-quick-menu__item:focus-visible,
+.x-scheduler-quick-menu__delete:focus-visible {
+  outline: 2px solid rgba(29, 155, 240, 0.8);
+  outline-offset: 2px;
+}
+
+.x-scheduler-quick-menu {
+  position: fixed;
+  z-index: 2147483647;
+  min-width: 320px;
+  max-width: 420px;
+  max-height: min(78vh, 680px);
+  padding: 10px;
+  border-radius: 18px;
+  background: rgba(15, 20, 25, 0.92);
+  color: rgb(231, 233, 234);
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.32), 0 2px 8px rgba(0, 0, 0, 0.22);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+@media (max-width: 500px) {
+  .x-scheduler-quick-menu {
+    min-width: calc(100vw - 24px);
+    max-width: calc(100vw - 24px);
+  }
+}
+
+.x-scheduler-quick-menu__section-title {
+  padding: 8px 10px 6px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: rgba(231, 233, 234, 0.72);
+}
+
+.x-scheduler-quick-menu__divider {
+  height: 1px;
+  margin: 8px 4px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.x-scheduler-quick-menu__editor {
+  display: grid;
+  gap: 10px;
+}
+
+.x-scheduler-quick-menu__editor-toggle {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 8px 10px;
+  border-radius: 12px;
+  text-align: left;
+}
+
+.x-scheduler-quick-menu__editor-toggle::after {
+  content: '▾';
+  float: right;
+  transition: transform 120ms ease;
+  opacity: 0.8;
+}
+
+.x-scheduler-quick-menu__editor-toggle[aria-expanded='false']::after {
+  transform: rotate(-90deg);
+}
+
+.x-scheduler-quick-menu__editor-toggle:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.x-scheduler-quick-menu__editor-body {
+  display: grid;
+  gap: 10px;
+  overflow: hidden;
+  max-height: 420px;
+  opacity: 1;
+  transition: max-height 160ms ease, opacity 160ms ease, margin-top 160ms ease;
+}
+
+.x-scheduler-quick-menu__editor-body.is-collapsed {
+  max-height: 0;
+  opacity: 0;
+  margin-top: 0;
+  pointer-events: none;
+}
+
+.x-scheduler-quick-menu__editor-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.x-scheduler-quick-menu__field {
+  display: grid;
+  gap: 6px;
+}
+
+.x-scheduler-quick-menu__field-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: rgba(231, 233, 234, 0.72);
+}
+
+.x-scheduler-quick-menu__field-input {
+  width: 100%;
+  height: 36px;
+  padding: 0 10px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.06);
+  color: inherit;
+  font: inherit;
+  box-sizing: border-box;
+  caret-color: rgb(29, 155, 240);
+}
+
+.x-scheduler-quick-menu__add-button {
+  appearance: none;
+  border: 0;
+  border-radius: 14px;
+  height: 38px;
+  padding: 0 14px;
+  background: rgba(29, 155, 240, 0.95);
+  color: #fff;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.x-scheduler-quick-menu__add-button:hover {
+  background: rgb(26, 140, 216);
+}
+
+.x-scheduler-quick-menu__item,
+.x-scheduler-quick-menu__delete {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.x-scheduler-quick-menu__item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  transition: background-color 120ms ease, transform 120ms ease;
+  text-align: left;
+}
+
+.x-scheduler-quick-menu__item:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.x-scheduler-quick-menu__item:active {
+  transform: scale(0.99);
+}
+
+.x-scheduler-quick-menu__item-label {
+  flex: 1;
+}
+
+.x-scheduler-quick-menu__preset-list {
+  display: grid;
+  gap: 6px;
+  max-height: 240px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.x-scheduler-quick-menu__preset-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 8px;
+  align-items: center;
+}
+
+.x-scheduler-quick-menu__preset-trigger {
+  margin: 0;
+}
+
+.x-scheduler-quick-menu__delete {
+  width: 36px;
+  height: 36px;
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 120ms ease, transform 120ms ease;
+}
+
+.x-scheduler-quick-menu__delete:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.x-scheduler-quick-menu__empty {
+  padding: 10px 12px 2px;
+  font-size: 13px;
+  color: rgba(231, 233, 234, 0.64);
+}
+
+@media (prefers-color-scheme: light) {
+  .x-scheduler-quick-menu {
+    background: rgba(255, 255, 255, 0.96);
+    color: rgb(15, 20, 25);
+    border-color: rgba(15, 20, 25, 0.08);
+  }
+
+  .x-scheduler-quick-menu__section-title {
+    color: rgba(15, 20, 25, 0.58);
+  }
+
+  .x-scheduler-quick-menu__divider {
+    background: rgba(15, 20, 25, 0.08);
+  }
+
+  .x-scheduler-quick-menu__item:hover,
+  .x-scheduler-quick-menu__delete:hover {
+    background: rgba(15, 20, 25, 0.06);
+  }
+
+  .x-scheduler-quick-menu__empty {
+    color: rgba(15, 20, 25, 0.58);
+  }
+
+  .x-scheduler-quick-menu__field-label {
+    color: rgba(15, 20, 25, 0.62);
+  }
+
+  .x-scheduler-quick-menu__field-input {
+    border-color: rgba(15, 20, 25, 0.12);
+    background: rgba(15, 20, 25, 0.04);
+  }
+
+  .x-scheduler-quick-menu__editor-toggle:hover {
+    background: rgba(15, 20, 25, 0.06);
+  }
+}
